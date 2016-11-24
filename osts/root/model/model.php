@@ -1,8 +1,8 @@
-<?php
-// Получение техники по  инвентарному номеру без учета инф о объектах  .
+п»ї<?php
+// РџРѕР»СѓС‡РµРЅРёРµ С‚РµС…РЅРёРєРё РїРѕ  РёРЅРІРµРЅС‚Р°СЂРЅРѕРјСѓ РЅРѕРјРµСЂСѓ Р±РµР· СѓС‡РµС‚Р° РёРЅС„ Рѕ РѕР±СЉРµРєС‚Р°С…  .
 function inv_get($dbh, $id_inv, $today)
 {
-	// Запрос.
+	// Р—Р°РїСЂРѕСЃ.
 	$t = "select * from OSB1, KCEX_GD, OS_TEX where (INV = ?) and (DD = $today) and (OSB1.CEX = KCEX_GD.CEX) and (OSB1.KODT = OS_TEX.KODT)";
 	$query = ibase_prepare($dbh, $t);
 	$sth = ibase_execute($query, $id_inv);
@@ -10,14 +10,14 @@ function inv_get($dbh, $id_inv, $today)
 	if (!$sth) 
 		die(ibase_error()); 
     
-	// Извлечение из БД. 
+	// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”. 
 	$row = ibase_fetch_assoc($sth);
 	return $row; 
 }
-// Получение техники по  инвентарному номеру с учетом инф о объектах.
+// РџРѕР»СѓС‡РµРЅРёРµ С‚РµС…РЅРёРєРё РїРѕ  РёРЅРІРµРЅС‚Р°СЂРЅРѕРјСѓ РЅРѕРјРµСЂСѓ СЃ СѓС‡РµС‚РѕРј РёРЅС„ Рѕ РѕР±СЉРµРєС‚Р°С….
 function inv_get_ob($dbh, $id_inv, $today)
 {
-	// Запрос.
+	// Р—Р°РїСЂРѕСЃ.
 	$t = "select * from OSB1, KCEX_GD, OS_TEX, OS_OB where (INV = ?) and (DD = $today) and (OSB1.CEX = KCEX_GD.CEX) and (OSB1.CEX = OS_OB.CEX) and (OSB1.KOB = OS_OB.KOB) and (OSB1.KODT = OS_TEX.KODT)";
 	$query = ibase_prepare($dbh, $t);
 	$sth = ibase_execute($query, $id_inv);
@@ -25,15 +25,15 @@ function inv_get_ob($dbh, $id_inv, $today)
 	if (!$sth) 
 		die(ibase_error()); 
     
-	// Извлечение из БД. 
+	// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”. 
 	$row = ibase_fetch_assoc($sth);
 	return $row; 
 }
 
-// Получение характеристик техники
+// РџРѕР»СѓС‡РµРЅРёРµ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє С‚РµС…РЅРёРєРё
 function haract_get($dbh, $id_inv, $today)
 {
-	// Запрос.
+	// Р—Р°РїСЂРѕСЃ.
 	$t = "select * from OSB1S, OS_XK where (INV = ?) and (DD = $today) and (OSB1S.KODX = OS_XK.KODX) order by OSB1S.KODX";
 	$query = ibase_prepare($dbh, $t);
 	$sth = ibase_execute($query, $id_inv);
@@ -42,7 +42,7 @@ function haract_get($dbh, $id_inv, $today)
 		die(ibase_error()); 
     //while ($row = ibase_fetch_object($sth)) {
   //echo ($row->XK.$row->NAIX."<br>");}
-	// Извлечение из БД.
+	// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”.
 	$count = 0;
 	while($row[$count] = ibase_fetch_assoc($sth))
 	{	
@@ -51,17 +51,17 @@ function haract_get($dbh, $id_inv, $today)
 	return $row; 
 }
 
-//Получение списков цехов
+//РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєРѕРІ С†РµС…РѕРІ
 function list_ceh($dbh)
 {
-	// Запрос
+	// Р—Р°РїСЂРѕСЃ
 	$query = "select * from KCEX_GD order by NAIM";
 	$sth = ibase_query($dbh, $query);
 	
 	if (!$sth) 
 		die(ibase_error());
 	
-	// Извлечение из БД.
+	// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”.
 	$count = 0;
 	while($row[$count] = ibase_fetch_assoc($sth))
 	{	
@@ -71,10 +71,10 @@ function list_ceh($dbh)
 	return $row;	
 }
 
-// Получение инвентарных номеров по заданному цеху без разделения по объектам
+// РџРѕР»СѓС‡РµРЅРёРµ РёРЅРІРµРЅС‚Р°СЂРЅС‹С… РЅРѕРјРµСЂРѕРІ РїРѕ Р·Р°РґР°РЅРЅРѕРјСѓ С†РµС…Сѓ Р±РµР· СЂР°Р·РґРµР»РµРЅРёСЏ РїРѕ РѕР±СЉРµРєС‚Р°Рј
 function inv_ceh($dbh, $ceh, $nait_ceh, $today)
 {
-	// Запрос
+	// Р—Р°РїСЂРѕСЃ
 	//$query = "select * from OSB1, KCEX_GD, OS_TEX, OS_OB where CEX = ? and DD = $today and OSB1.CEX = KCEX_GD.CEX and OSB1.CEX = OS_OB.CEX and OSB1.KOB = OS_OB.KOB and OSB1.KODT = OS_TEX.KODT order by INV";
 	if ($nait_ceh == '0')
 	{
@@ -90,7 +90,7 @@ function inv_ceh($dbh, $ceh, $nait_ceh, $today)
 	if (!$sth) 
 		die(ibase_error());
 	
-	// Извлечение из БД.
+	// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”.
 	$count = 0;
 	while($row[$count] = ibase_fetch_assoc($sth))
 	{	
@@ -100,7 +100,7 @@ function inv_ceh($dbh, $ceh, $nait_ceh, $today)
 	return $row;	
 }
 
-// Получение инвентарных номеров по заданному цеху и объекту
+// РџРѕР»СѓС‡РµРЅРёРµ РёРЅРІРµРЅС‚Р°СЂРЅС‹С… РЅРѕРјРµСЂРѕРІ РїРѕ Р·Р°РґР°РЅРЅРѕРјСѓ С†РµС…Сѓ Рё РѕР±СЉРµРєС‚Сѓ
 function inv_ceh_ob($dbh, $ceh, $ob, $nait, $today)
 {
 	if ($nait == '0')
@@ -113,7 +113,7 @@ function inv_ceh_ob($dbh, $ceh, $ob, $nait, $today)
 		
 		$t = "select * from OSB1, KCEX_GD, OS_TEX, OS_OB where (OSB1.CEX = ?) and (OS_OB.KOB = ?) and (OSB1.KODT = ?) and (DD = $today) and (OSB1.CEX = KCEX_GD.CEX) and (OSB1.CEX = OS_OB.CEX) and (OSB1.KOB = OS_OB.KOB) and (OSB1.KODT = OS_TEX.KODT) order by INV";
 	}
-	// Запрос
+	// Р—Р°РїСЂРѕСЃ
 	
 	$query = ibase_prepare($dbh, $t);
 	$sth = ibase_execute($query, $ceh, $ob, $nait);
@@ -121,7 +121,7 @@ function inv_ceh_ob($dbh, $ceh, $ob, $nait, $today)
 	if (!$sth) 
 		die(ibase_error());
 	
-	// Извлечение из БД.
+	// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”.
 	$count = 0;
 	while($row[$count] = ibase_fetch_assoc($sth))
 	{	
@@ -131,10 +131,10 @@ function inv_ceh_ob($dbh, $ceh, $ob, $nait, $today)
 	return $row;	
 }
 
-//получение объектов(подразделения) в цехе
+//РїРѕР»СѓС‡РµРЅРёРµ РѕР±СЉРµРєС‚РѕРІ(РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ) РІ С†РµС…Рµ
 function ob_get($dbh, $ceh)
 {
-	// Запрос
+	// Р—Р°РїСЂРѕСЃ
 	$t = "select * from OS_OB where CEX=? order by KOB";
 	$query = ibase_prepare($dbh, $t);
 	$sth = ibase_execute($query, $ceh);
@@ -143,8 +143,8 @@ function ob_get($dbh, $ceh)
 		die(ibase_error());
 
  // while ($row = ibase_fetch_object($sth)) {
-//  echo ("цех-".$row->CEX."об-".$row->NAIO."кодоб-".$row->KOB."отв-".$row->FIOO."<br>");}
-		// Извлечение из БД.
+//  echo ("С†РµС…-".$row->CEX."РѕР±-".$row->NAIO."РєРѕРґРѕР±-".$row->KOB."РѕС‚РІ-".$row->FIOO."<br>");}
+		// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”.
 		$count = 0;
 		while($row[$count] = ibase_fetch_assoc($sth))
 		{	
@@ -154,10 +154,10 @@ function ob_get($dbh, $ceh)
 	return $row;	
 }
 
-//получение объекта по инв номер
+//РїРѕР»СѓС‡РµРЅРёРµ РѕР±СЉРµРєС‚Р° РїРѕ РёРЅРІ РЅРѕРјРµСЂ
 function ob_get_inv($dbh, $id_inv, $today)
 {
-	// Запрос
+	// Р—Р°РїСЂРѕСЃ
 	$t = "select KOB from OSB1 where INV=? and DD = $today";
 	$query = ibase_prepare($dbh, $t);
 	$sth = ibase_execute($query, $id_inv);
@@ -166,15 +166,15 @@ function ob_get_inv($dbh, $id_inv, $today)
 		die(ibase_error());
 
  // while ($row = ibase_fetch_object($sth)) {
-//  echo ("цех-".$row->CEX."об-".$row->NAIO."кодоб-".$row->KOB."отв-".$row->FIOO."<br>");}
+//  echo ("С†РµС…-".$row->CEX."РѕР±-".$row->NAIO."РєРѕРґРѕР±-".$row->KOB."РѕС‚РІ-".$row->FIOO."<br>");}
 	
-		// Извлечение из БД. 
+		// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”. 
 	$row = ibase_fetch_assoc($sth);
 	return $row;
 	
 }
 
-// Получение обслуживания по инвентарному номеру
+// РџРѕР»СѓС‡РµРЅРёРµ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ РїРѕ РёРЅРІРµРЅС‚Р°СЂРЅРѕРјСѓ РЅРѕРјРµСЂСѓ
 function obsl_get($dbh, $id_inv)
 {
 	$t = "select * from OBSLS, OS_TN, OS_TIJ, OS_TIR where OBSLS.INV = ? and (OBSLS.TN = OS_TN.TN) and (OBSLS.KODJ = OS_TIJ.KODJ) and (OBSLS.KODR = OS_TIR.KODR)";
@@ -184,7 +184,7 @@ function obsl_get($dbh, $id_inv)
 	if (!$sth) 
 		die(ibase_error());
 		
-	// Извлечение из БД.
+	// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”.
 	
 	$count = 0;
 	while($row[$count] = ibase_fetch_assoc($sth))
@@ -195,7 +195,7 @@ function obsl_get($dbh, $id_inv)
 	return $row;
 }
 
-// Получение видов техники цеха
+// РџРѕР»СѓС‡РµРЅРёРµ РІРёРґРѕРІ С‚РµС…РЅРёРєРё С†РµС…Р°
 function nait_c_get($dbh, $ceh)
 {
 $t = "select distinct osb1.kodt, os_tex.nait from OSB1, os_tex where OSB1.CEX = ? and os_tex.kodt = osb1.kodt";
@@ -205,7 +205,7 @@ $t = "select distinct osb1.kodt, os_tex.nait from OSB1, os_tex where OSB1.CEX = 
 	if (!$sth) 
 		die(ibase_error());
 		
-	// Извлечение из БД.
+	// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”.
 	
 	$count = 0;
 	while($row[$count] = ibase_fetch_assoc($sth))
@@ -216,7 +216,7 @@ $t = "select distinct osb1.kodt, os_tex.nait from OSB1, os_tex where OSB1.CEX = 
 	return $row;
 }
 
-// Получение видов техники подразделения
+// РџРѕР»СѓС‡РµРЅРёРµ РІРёРґРѕРІ С‚РµС…РЅРёРєРё РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ
 function nait_ob_get($dbh, $ceh, $ob)
 {
 $t = "select distinct osb1.kodt, os_tex.nait from OSB1, os_tex where OSB1.CEX = ? and OSB1.KOB = ? and os_tex.kodt = osb1.kodt";
@@ -226,7 +226,7 @@ $t = "select distinct osb1.kodt, os_tex.nait from OSB1, os_tex where OSB1.CEX = 
 	if (!$sth) 
 		die(ibase_error());
 		
-	// Извлечение из БД.
+	// РР·РІР»РµС‡РµРЅРёРµ РёР· Р‘Р”.
 	
 	$count = 0;
 	while($row[$count] = ibase_fetch_assoc($sth))
@@ -238,16 +238,16 @@ $t = "select distinct osb1.kodt, os_tex.nait from OSB1, os_tex where OSB1.CEX = 
 }
 
 /*
-// Добавлени статьи
+// Р”РѕР±Р°РІР»РµРЅРё СЃС‚Р°С‚СЊРё
 function page_add($dbh, $title, $content)
 {	
-	// Подготовка.
+	// РџРѕРґРіРѕС‚РѕРІРєР°.
 	$title = trim($title);
 	$content = trim($content);
-	// Проверка.
+	// РџСЂРѕРІРµСЂРєР°.
 	if ($title == '')
 		return false; 
-	// Запрос
+	// Р—Р°РїСЂРѕСЃ
 	$t = "INSERT INTO BOOK (NAME, CONTENT) VALUES (?, ?)";
 
 	$query = ibase_prepare($dbh, $t);
@@ -263,21 +263,21 @@ function page_add($dbh, $title, $content)
 
 /*
 
-//редактирование статьи
+//СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃС‚Р°С‚СЊРё
 function page_edit($id, $name, $content, $dbh)
 {
-	// Подготовка.
+	// РџРѕРґРіРѕС‚РѕРІРєР°.
 	$title = trim($name);
 	$content = trim($content);
-	// Проверка.
+	// РџСЂРѕРІРµСЂРєР°.
 	
 	if ($title == '')
 	{
-		echo 'функция';
+		echo 'С„СѓРЅРєС†РёСЏ';
 		return false;
 	}
 	
-	// Запрос.
+	// Р—Р°РїСЂРѕСЃ.
 	//$t = "UPDATE BOOK SET NAME = '%s', CONTENT = '%s' where ID = '%d'";
 	$t = "UPDATE BOOK SET NAME = ?, CONTENT = ? where ID = ?";
 	//$squery = sprintf($t,
@@ -296,11 +296,11 @@ function page_edit($id, $name, $content, $dbh)
 
 /*
 
-// Удалить статью
+// РЈРґР°Р»РёС‚СЊ СЃС‚Р°С‚СЊСЋ
 
 function page_delete($id_page, $dbh)
 {
-	// Запрос.
+	// Р—Р°РїСЂРѕСЃ.
 	$t = "DELETE from BOOK where ID = '%d'";
 	$squery = sprintf($t,
 					$id_page);
@@ -312,12 +312,12 @@ function page_delete($id_page, $dbh)
 	return true;
 } 
 
-// Короткое описание статьи
+// РљРѕСЂРѕС‚РєРѕРµ РѕРїРёСЃР°РЅРёРµ СЃС‚Р°С‚СЊРё
 //
 function articles_intro($book)
 {
 	// TODO
-	// $article - это ассоциативный массив, представляющий статью
+	// $article - СЌС‚Рѕ Р°СЃСЃРѕС†РёР°С‚РёРІРЅС‹Р№ РјР°СЃСЃРёРІ, РїСЂРµРґСЃС‚Р°РІР»СЏСЋС‰РёР№ СЃС‚Р°С‚СЊСЋ
 	$intro = $book;
 	for ($i = 0; $i < count($intro); $i++)
 	{

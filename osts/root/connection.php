@@ -1,13 +1,13 @@
-<?php
+ï»¿<?php
 function connect()
 {
-        //Íàñòðîéêè ïîäêëþ÷åíèÿ ê ÁÄ.
+        //ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ Ðº Ð‘Ð”.
         $host = 'ibdc.dmkd.dp.ua:osts';
         $username = 'ISIN';
         $password = '2306';
-        //Ïîäêëþ÷åíèå ê ÁÄ.
+        //ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ðº Ð‘Ð”.
         $dbh = ibase_connect($host, $username, $password, 'WIN1251', 0, 3);
-        if(!$dbh) die("îøèáêà ñîåäèíåíèÿ ". ibase_error());
+        if(!$dbh) die("Ð¾ÑˆÐ¸Ð±ÐºÐ° ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ñ ". ibase_error());
         return $dbh;
 
         
