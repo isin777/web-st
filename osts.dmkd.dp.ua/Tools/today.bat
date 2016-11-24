@@ -1,1 +1,0 @@
-"e:\www\libs\analog 6.0\analog.exe" +gtoday.cfg
