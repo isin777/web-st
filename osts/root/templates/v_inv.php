@@ -1,41 +1,41 @@
-п»ї<?/*
-РЁР°Р±Р»РѕРЅ СЃС‚СЂР°РЅРёС†С‹ РІС‹РІРѕРґ С…-РєРё РїРѕ РёРЅРІРµРЅС‚Р°СЂРЅРѕРјСѓ РЅРѕРјРµСЂСѓ
+<?/*
+Шаблон страницы вывод х-ки по инвентарному номеру
 =======================
 
-$invent- С‚РµС…РЅРёРєР° РїРѕ РёРЅРІРµРЅС‚Р°СЂРЅРѕРјСѓ:
-INV - РёРЅРІРµРЅС‚Р°СЂРЅС‹Р№ РЅРѕРјРµСЂ
-NAIT - РЅР°РёРјРµРЅРѕРІР°РЅРёРµ С‚РµС…РЅРёРєРё
-NAIM - РЅР°РёРјРµРЅРѕРІР°РЅРёРµ С†РµС…Р°
-CEX - РЅРѕРјРµСЂ С†РµС…Р°
-NAIO - РѕР±СЉРµРєС‚
-MESTO - РњРµСЃС‚Рѕ СЂР°СЃРїРѕР»РѕР¶РµРЅРёСЏ
-USIK - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ
-FIOO - РћС‚РІРµС‚СЃС‚РІРµРЅРЅС‹Р№ Р·Р° СЌРєСЃРїР»СѓР°С‚Р°С†РёСЋ
-GVP - Р“РѕРґ РІС‹РїСѓСЃРєР°
+$invent- техника по инвентарному:
+INV - инвентарный номер
+NAIT - наименование техники
+NAIM - наименование цеха
+CEX - номер цеха
+NAIO - объект
+MESTO - Место расположения
+USIK - Пользователь
+FIOO - Ответственный за эксплуатацию
+GVP - Год выпуска
 
-$har - С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР° С‚РµС…РЅРёРєРё
-NAIX - РЅР°РёРјРµРЅРѕРІР°РЅРёРµ С…-РєРё
-XK - Р·РЅР°С‡РµРЅРёРµ С…-РєРё 
+$har - характеристика техники
+NAIX - наименование х-ки
+XK - значение х-ки 
 */?>
-<a href="index.php"><font color="blue"><b>РџРѕРёСЃРє РїРѕ РёРЅРІРµРЅС‚Р°СЂРЅРѕРјСѓ РЅРѕРјРµСЂСѓ</b></font></a> | <a href="ceh.php"><b><font color="blue">Р’С‹Р±РѕСЂ Р¦РµС…Р°</font></b></a> | <a href="ceh.php?id=<?=$invent['CEX']?>"><b><font color="blue">РџСЂРѕСЃРјРѕС‚СЂ <?=$invent['NAIM']?></font></b></a>
+<a href="index.php"><font color="blue"><b>Поиск по инвентарному номеру</b></font></a> | <a href="ceh.php"><b><font color="blue">Выбор Цеха</font></b></a> | <a href="ceh.php?id=<?=$invent['CEX']?>"><b><font color="blue">Просмотр <?=$invent['NAIM']?></font></b></a>
 <br/><br/>
 <hr width="100%">
 <h2 align="center" ><?=$invent['NAIT']?></h2>
 <hr width="100%">
-<h4 align="center">РРЅРІРµРЅС‚Р°СЂРЅС‹Р№ РЅРѕРјРµСЂ: <?=$invent['INV']?></h4>
+<h4 align="center">Инвентарный номер: <?=$invent['INV']?></h4>
 <table border="1" align="center" cellpadding="10" cellspacing="5">
 <tr>
-	<td>Р¦РµС…: <?=$invent['CEX']?> <?=$invent['NAIM']?></td>
-	<td>РџРѕРґСЂР°Р·РґРµР»РµРЅРёРµ: <?=$invent['NAIO']?></td>
-	<td>РњРµСЃС‚Рѕ СЂР°СЃРїРѕР»РѕР¶РµРЅРёСЏ: <?=$invent['MESTO']?></td>
+	<td>Цех: <?=$invent['CEX']?> <?=$invent['NAIM']?></td>
+	<td>Подразделение: <?=$invent['NAIO']?></td>
+	<td>Место расположения: <?=$invent['MESTO']?></td>
 </tr>
 <tr>
-	<td>РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ: <?=$invent['USIK']?></td>
-	<td>РћС‚РІРµС‚СЃС‚РІРµРЅРЅС‹Р№ Р·Р° СЌРєСЃРїР»СѓР°С‚Р°С†РёСЋ: <?=$invent['FIOO']?><?=$invent['FIOC']?></td>
-	<td>Р“РѕРґ РІС‹РїСѓСЃРєР°: <?=$invent['GVP']?></td>
+	<td>Пользователь: <?=$invent['USIK']?></td>
+	<td>Ответственный за эксплуатацию: <?=$invent['FIOO']?><?=$invent['FIOC']?></td>
+	<td>Год выпуска: <?=$invent['GVP']?></td>
 </tr>
 </table>
-<h4 align="center">РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё</h4>
+<h4 align="center">Характеристики</h4>
 <table border="1" align="center" cellpadding="10" cellspacing="5">
 <?php for ($i = 0; $i < (count($har)-1); $i++): ?>
 	<tr>
@@ -46,7 +46,7 @@ XK - Р·РЅР°С‡РµРЅРёРµ С…-РєРё
 </table>
 
 
-	<a href="obsl.php?inv_obs=<?=$invent['INV']?>"><font color="blue"><p align="center"><b><?=РћР±СЃР»СѓР¶РёРІР°РЅРёРµ?></b></p></font></a>
+	<a href="obsl.php?inv_obs=<?=$invent['INV']?>"><font color="blue"><p align="center"><b><?=Обслуживание?></b></p></font></a>
 	
 <br/><br/>
 <hr width="100%">

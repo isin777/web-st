@@ -1,27 +1,27 @@
-п»ї<?php
-//РїРѕРґРєР»СЋС‡РµРЅРёРµ Р±РёР±Р»РёРѕС‚РµРє
+<?php
+//подключение библиотек
 include_once('connection.php');
 include_once('model/model.php');
 include_once('view.php');
 $dbh = connect();  
-// РІС‹РІРѕРґРёРј РѕР±СЃР»СѓР¶РёРІР°РЅРёРµ
+// выводим обслуживание
 if (isset($_GET['inv_obs']))
 {
 	$id_inv = $_GET['inv_obs'];
 	$today = date("ym");
-	//Р—Р°РіРѕР»РѕРІРѕРє СЃС‚СЂР°РЅРёС†С‹
-	$title = 'РћР±СЃР»СѓР¶РёРІР°РЅРёРµ С‚РµС…РЅРёРєРё РёРЅРІ. в„– ' . $id_inv;
+	//Заголовок страницы
+	$title = 'Обслуживание техники инв. № ' . $id_inv;
 	$obsl_inv = obsl_get($dbh, $id_inv);
-	//РІС‹РІРѕРґРёРј РѕР±СЃР»СѓР¶РёРІР°РЅРёРµ
-	// Р’РЅСѓС‚СЂРµРЅРЅРёР№ С€Р°Р±Р»РѕРЅ
+	//выводим обслуживание
+	// Внутренний шаблон
 	$content = view_include('templates/v_obsl.php', array('obsl_inv' => $obsl_inv));
 }	
 
 
-// Р’РЅРµС€РЅРёР№ С€Р°Р±Р»РѕРЅ.
+// Внешний шаблон.
 $page = view_include(
 	'templates/main.php', 
 	array('title' => $title, 'content' => $content));
 
-// Р’С‹РІРѕРґ.
+// Вывод.
 echo $page; 
